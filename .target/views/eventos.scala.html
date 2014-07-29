@@ -1,6 +1,7 @@
-@(sistema: Sistema, eventos: List[Evento])
+@(sistema: Sistema, tema: String)
+ <div class="container form-horizontal panel panel-primary text-info" >
+<h2>Eventos que envolvem @tema:</h2>
 
-<h2>Eventos do tema1</h2>
 <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -13,7 +14,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @for(evento <- eventos) {
+                    @for(evento <- sistema.EventosPorTema(tema)) {
                     	
                         <tr>
                             <td>@evento.getNome()</td>
@@ -22,7 +23,7 @@
                             
                             <td>
                                                     
-                            <form action="MUDARAKI" method="post"> 
+                            <form action="@routes.Application.participar(evento.getId())" method="post"> 
                                 <input type="submit" class="btn btn-primary" value="Participar">
                             </form> 
                             </td>
@@ -31,4 +32,4 @@
                     }
                     </tbody>
                 </table>
-            </div>
+            </div></div>
