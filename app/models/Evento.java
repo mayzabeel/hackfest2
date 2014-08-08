@@ -113,7 +113,7 @@ public class Evento implements Comparable<Evento> {
 		return this.PessoasQueConfirmaram.size();
 	}
 	
-	@Override
+	//@Override
 	public int compareTo(Evento evento) {
 		if (this.PessoasQueConfirmaram.size() > evento.numDePessoasQueConfirmaram()) {
 		      return -1;

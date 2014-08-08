@@ -11,45 +11,45 @@ import play.db.jpa.JPA;
  */
 public class GenericDAOImpl implements GenericDAO {
 
-	@Override
+	//@Override
 	public boolean persist(Object e) {
 		JPA.em().persist(e);
 		return true;
 	}
 
-	@Override
+	//@Override
 	public void flush() {
 		JPA.em().flush();
 	}
 
-	@Override
+	//@Override
 	public void merge(Object e) {
 		JPA.em().merge(e);
 	}
 
-	@Override
+	//@Override
 	public <T> T findByEntityId(Class<T> clazz, Long id) {
 		return JPA.em().find(clazz, id);
 	}
 
-	@Override
+	//@Override
 	public <T> List<T> findAllByClassName(String className) {
 		String hql = "FROM " + className;
 		Query hqlQuery = JPA.em().createQuery(hql);
 		return hqlQuery.getResultList();
 	}
 
-	@Override
+	//@Override
 	public <T> void removeById(Class<T> classe, Long id) {
 		JPA.em().remove(findByEntityId(classe, id));
 	}
 
-	@Override
+	//@Override
 	public void remove(Object objeto) {
 		JPA.em().remove(objeto);
 	}
 
-	@Override
+	//@Override
 	public <T> List<T> findByAttributeName(String className,
 			String attributeName, String attributeValue) {
 		String hql = "FROM " + className + " c" + " WHERE c." + attributeName
@@ -58,7 +58,7 @@ public class GenericDAOImpl implements GenericDAO {
 		return hqlQuery.getResultList();
 	}
 
-	@Override
+	//@Override
 	public Query createQuery(String query) {
 		return JPA.em().createQuery(query);
 	}
