@@ -18,8 +18,10 @@ public class Application extends Controller {
 	private static int controleInicio;
 
     public static Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok(index.render("Home Page"));
     }
+
+    
     
     @Transactional
     public static Result sistema() {
