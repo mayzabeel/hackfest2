@@ -17,9 +17,9 @@
 	<body>	
 		<center><img class="centralizar" src="@routes.Assets.at("images/logo.png")" /> </center>
         <ul class="nav nav-pills">
-          <li><a href="/""> In&iacute;cio</a></li>
+          <li><a href="/sistema""> In&iacute;cio</a></li>
           <li class="active"><a href="/cadastrarHackfest">Cadastrar um novo Hackfest</a></li>
-          
+          <li><a href="/logout">Sair</a></li>
         </ul>	
         <div class="container form-horizontal panel panel-primary text-info" >
         
@@ -33,7 +33,11 @@
 			
 			<input class="input-xxlarge" type="text" size="80" maxlength="30" placeholder="T&iacute;tulo do hackfest" name="nome"><br><br>
             <input class="input-xxlarge" type="text" size="176" maxlength="80" placeholder="Descreva o seu hackfest" name="descricao"><br><br>
-            <input class="input-xxlarge" type="text" size="40" maxlength="10" placeholder="Data do seu hackfest: dd/mm/aaaa" name="data"> <br>
+            <input class="input-xxlarge" type="text" size="40" maxlength="10" placeholder="Data do seu hackfest: dd/mm/aaaa" name="data"> <br><br>
+            <input class="input-xxlarge" type="text" size="176" maxlength="80" placeholder="Nome do local do seu hackfest" name="nomeLocal"><br><br>
+            <input class="input-xxlarge" type="text" size="176" maxlength="10" placeholder="Descreva em numero quantas pessoas suporta esse local Ex:500" name="capacidade"><br><br>
+            <input class="input-xxlarge" type="text" size="176" maxlength="80" placeholder="Descreva como chegar no local" name="descricaoLocal"><br>
+            
             <h4> <b>Apague</b> o(s) tema(s) na qual o seu evento n&atilde;o est&aacute; relacionado:</h4>
             <input class="input-xlarge" size="30" id="focusedInput" type="text" value="Engenharia de Software" name=tema1>
             <input class="input-xlarge" size="30" id="focusedInput" type="text" value="Banco de Dados" name=tema2>

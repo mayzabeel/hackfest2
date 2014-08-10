@@ -2,16 +2,19 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+
+
 # Home page
-GET     /                                controllers.Application.sistema()
-GET     /                           	 controllers.Application.index()
+GET     /                            	 controllers.Application.index()
 GET     /logout							 controllers.Login.logout()
-
-
 
 # Login
 GET     /login                           controllers.Login.show()
 POST    /login                           controllers.Login.authenticate()
+
+# Sistema
+GET     /sistema                                controllers.Application.sistema()
+
 
 # Registro
 GET     /registrar                       controllers.Registro.show()

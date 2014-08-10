@@ -18,8 +18,9 @@
 	<body>	
 		<center><img class="centralizar" src="@routes.Assets.at("images/logo.png")" /> </center>
         <ul class="nav nav-pills">
-          <li><a href="/""> In&iacute;cio</a></li>
+          <li><a href="/sistema""> In&iacute;cio</a></li>
           <li class="active"><a href="/cadastrarHackfest">Participar de Evento</a></li>
+          <li><a href="/logout">Sair</a></li>
           
         </ul>	
         <div class="container form-horizontal panel panel-primary text-info" >
@@ -27,15 +28,20 @@
        
 		<center><h2><b>Sistema de Hackfests - Confirma&ccedil;&atilde;o de Participa&ccedil;&atilde;o </b></h2></center>
 		<h3><center>Hackfest: @evento.getNome()</center> <br>
-		Idealizador do evento: @evento.getNomeAdmin() <br> Contato: @evento.getEmailAdmin() <br> </h3>
+		Idealizador do evento: @evento.getNomeAdmin() <br> 
+		Contato: @evento.getEmailAdmin() <br>
+		Local: @evento.getNomeDoLocal() <br>
+		Capacidade: @evento.getCapacidadeDoLocal() <br>
+		Como chegar: @evento.getComoChegar()
+		 </h3>
 		</div>
 		<center>
 		<h3>Para participar insira seus dados e clique em participar:</h3>
-		<h3>@evento.numDePessoasQueConfirmaram()</h3>
+		<h3>@evento.getNumDePessoasQueConfirmaram()</h3>
 		<form action="@routes.Application.addParticipante(evento.getId())" method="post">
 		<input class="input-xxlarge" type="text" size="30" maxlength="30" placeholder="Insira o seu nome" name="nome">
 		<input class="input-xxlarge" type="text" size="50" maxlength="30" placeholder="Insira o Seu email" name="email">
-		<input type="submit" class="btn btn-primary" value="Participar">  
+		<input type="submit" class="btn btn-primary"  value="Participar">  
 		</form>
 		</center>
 		<h3>Pessoas que j&aacute; confirmaram presen&ccedil;a:</h3>
@@ -45,9 +51,7 @@
                         <tr>
                             <th>Nome </th>
                             <th>Email </th>
-                            
-                             
-                            
+                                                                                   
                         </tr>
                     </thead>
                     <tbody>

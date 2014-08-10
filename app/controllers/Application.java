@@ -18,6 +18,9 @@ public class Application extends Controller {
 	private static int controleInicio;
 
     public static Result index() {
+    	if (session().get("user") == null) {
+			return redirect(routes.Login.show());
+		}
         return ok(index.render("Home Page"));
     }
 

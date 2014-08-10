@@ -9,6 +9,8 @@ import javax.persistence.SequenceGenerator;
 
 @Entity(name = "Pessoa")
 public class Pessoa {
+	
+	
 	// Gerador de Sequencia para o Id
 	// Todo Id tem que ter o GeneratedValue a não ser que ele seja setado
 	@Id
@@ -23,6 +25,9 @@ public class Pessoa {
 	@Column
 	private String email;
 	
+	@Column
+	private String pass;
+	
 	// Construtor vazio para o Hibernate criar os objetos
 	public Pessoa (){
 		
@@ -31,6 +36,7 @@ public class Pessoa {
 	public Pessoa (String nome, String email){
 		this.email = email;
 		this.nome = nome;
+		this.pass = pass;
 	}
 
 	public String getNome() {
@@ -48,6 +54,15 @@ public class Pessoa {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
 
 	public Long getId() {
 		return id;
