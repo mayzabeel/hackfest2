@@ -52,11 +52,6 @@ public class Sistema {
 		return retorno;
 	}
 	
-	public List<Evento> EventosOrdenadosPorQuantidadeDePessoas(){
-		List<Evento> copiaDeEventos = this.eventos;
-		Collections.sort(copiaDeEventos);
-		return copiaDeEventos;
-	}
 	
 	public int numDeEventos(){
 		return this.eventos.size();
@@ -64,6 +59,20 @@ public class Sistema {
 	
 	public boolean contemEvento(Evento evento){
 		return this.eventos.contains(evento);
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public List<Evento> EventosOrdenadosPorQuantidadeDePessoas(){
+		List<Evento> copiaDeEventos = this.eventos;
+		Collections.sort(copiaDeEventos);
+		return copiaDeEventos;
 	}
 	
 	public void addPessoaNoEvento(Evento evento, Pessoa pessoa){
@@ -78,25 +87,6 @@ public class Sistema {
 				}
 			}
 		}
-	}
-	
-	public void removePessoaDoEvento(Evento evento, Pessoa pessoa){
-		if (this.eventos.contains(evento)){
-			for (Evento eventoaux : this.eventos){
-				if (eventoaux.equals(evento)){
-					this.eventos.remove(eventoaux);
-					return;
-				}
-			}
-		}
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 	
 	

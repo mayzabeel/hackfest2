@@ -7,9 +7,6 @@ import java.util.TreeSet;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.IndexColumn;
-
-
 
 @Entity(name = "Evento")
 public class Evento implements Comparable<Evento> {
@@ -52,33 +49,30 @@ public class Evento implements Comparable<Evento> {
 	@Column
 	private String tema5;
 	
-	@Column
-	private String nomeDoLocal;
 	
-	@Column
-	private String capacidadeDoLocal;
-	
-	@Column
-	private String comoChegar;
+	/**@OneToOne
+	private Local local;/**/
+
 		
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn 
 	private Set<Pessoa> PessoasQueConfirmaram;
 	
+	
+	
 	// Construtor vazio para o Hibernate criar os objetos
 	public Evento(){
 		this.PessoasQueConfirmaram = new TreeSet<Pessoa>();
 	}
-	public Evento(String nome, String descricao, String data, String nomeAdmin, String emailAdmin) {
+	public Evento(String nome, String descricao, String data, String nomeAdmin, String emailAdmin, Integer capacidade, String comoChegar) {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.data = data;
 		this.nomeAdmin = nomeAdmin;
 		this.emailAdmin = emailAdmin;
+		//this.local = new Local(nomeAdmin, capacidade, comoChegar);
 		this.PessoasQueConfirmaram = new TreeSet<Pessoa>();
-		this.nomeDoLocal = nomeDoLocal;
-		this.capacidadeDoLocal = capacidadeDoLocal;
-		this.comoChegar = comoChegar;
+		
 		
 		
 	}
@@ -100,30 +94,8 @@ public class Evento implements Comparable<Evento> {
 	public void setData(String data) {
 		this.data = data;
 	}
+				
 	
-	public String getNomeDoLocal() {
-		if (nomeDoLocal == null){
-			return "";
-		}
-		return nomeDoLocal;
-	}
-	public void setNomeDoLocal(String nome) {
-		this.nomeDoLocal = nomeDoLocal;
-	}
-	
-	public String getCapacidadeDoLocal() {
-		return capacidadeDoLocal;
-	}
-	public void setCapacidadeDoLocal(String nome) {
-		this.capacidadeDoLocal = capacidadeDoLocal;
-	}
-	public String getComoChegar() {
-		return comoChegar;
-	}
-	public void setComoChegar(String nome) {
-		this.comoChegar = comoChegar;
-	}
-		
 	public Integer getNumDePessoasQueConfirmaram() {
 		return PessoasQueConfirmaram.size();
 	}

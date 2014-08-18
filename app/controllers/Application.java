@@ -2,6 +2,11 @@ package controllers;
 
 import java.util.List;
 
+
+
+
+import org.h2.engine.User;
+
 import models.*;
 import models.dao.GenericDAO;
 import models.dao.GenericDAOImpl;
@@ -16,18 +21,29 @@ public class Application extends Controller {
 	static Form<Pessoa> pessoaForm = Form.form(Pessoa.class);
 	private static GenericDAO dao = new GenericDAOImpl();
 	private static int controleInicio;
+	
 
+
+   // public static Result index() {
+    //	return redirect(routes.Login.show());
+   // }
+    
     public static Result index() {
-    	if (session().get("user") == null) {
+		if (session().get("user") == null) {
 			return redirect(routes.Login.show());
 		}
-        return ok(index.render("Home Page"));
+		Sistema sistema = new Sistema();
+		
+		return ok(views.html.sistema.render(sistema));
     }
 
-    
+
+ 
+   
     
     @Transactional
     public static Result sistema() {
+    	
     	controleInicio = controleInicio + 1;
     	if (controleInicio == 1){
     		
@@ -49,16 +65,18 @@ public class Application extends Controller {
     		String tema5;
     		
     		
-    		evento1 = new Evento("Dados abertos", "Esse evento tem o objetivo de realizar atividades com dados abertos", "11/09/2014", "Jose", "jose@gmail.com");
-    		evento2 = new Evento("HTML", "Esse evento tem o objetivo de realizar atividades com HTML", "09/09/2014", "Jose", "jose@gmail.com");
-    		evento3 = new Evento("Computacao Desplugada", "Esse evento tem o objetivo de realizar atividades com computacao desplugada", "11/06/2014", "Jose", "jose@gmail.com");
-    		evento4 = new Evento("Metodos Formais", "Esse evento tem o objetivo de realizar atividades com metodos formais", "18/06/2014", "Jose", "jose@gmail.com");
-    		evento5 = new Evento("Banco de Dados Gerenciais", "Esse evento tem o objetivo de realizar atividades com banco de dados gerenciais", "11/09/2014", "Jose", "jose@gmail.com");
-    		evento6 = new Evento("Banco de Dados Sequenciais", "Esse evento tem o objetivo de realizar atividades com banco de dados sequenciais", "14/09/2014", "Jose", "jose@gmail.com");
-    		evento7 = new Evento("Sites Dinamicos", "Esse evento tem o objetivo de realizar atividades com sites dinamicos", "17/08/2014", "Jose", "jose@gmail.com");
-    		evento8 = new Evento("Aplicações Java", "Esse evento tem o objetivo de realizar atividades com aplicacoes java", "01/09/2014", "Jose", "jose@gmail.com");
-    		evento9 = new Evento("Estruturas de dados", "Esse evento tem o objetivo de realizar atividades com estruturas de dados", "12/07/2014", "Jose", "jose@gmail.com");
-    		evento10 = new Evento("Binarios", "Esse evento tem o objetivo de realizar atividades com binarios sem a utilizacao de computador", "11/09/2014", "Jose", "jose@gmail.com");
+    		
+    		
+    		evento1 = new Evento("Dados abertos", "Esse evento tem o objetivo de realizar atividades com dados abertos", "11/09/2014", "Jose", "jose@gmail.com" , 3, "Rua da Liberdade,178");
+    		evento2 = new Evento("HTML", "Esse evento tem o objetivo de realizar atividades com HTML", "09/09/2014", "Jose", "jose@gmail.com" , 100, "Rua da Liberdade,178");
+    		evento3 = new Evento("Computacao Desplugada", "Esse evento tem o objetivo de realizar atividades com computacao desplugada", "11/06/2014", "Jose", "jose@gmail.com", 100, "Rua da Liberdade,178");
+    		evento4 = new Evento("Metodos Formais", "Esse evento tem o objetivo de realizar atividades com metodos formais", "18/06/2014", "Jose", "jose@gmail.com", 100, "Rua da Liberdade,178");
+    		evento5 = new Evento("Banco de Dados Gerenciais", "Esse evento tem o objetivo de realizar atividades com banco de dados gerenciais", "11/09/2014", "Jose", "jose@gmail.com", 100, "Rua da Liberdade,178");
+    		evento6 = new Evento("Banco de Dados Sequenciais", "Esse evento tem o objetivo de realizar atividades com banco de dados sequenciais", "14/09/2014", "Jose", "jose@gmail.com", 100, "Rua da Liberdade,178");
+    		evento7 = new Evento("Sites Dinamicos", "Esse evento tem o objetivo de realizar atividades com sites dinamicos", "17/08/2014", "Jose", "jose@gmail.com", 100, "Rua da Liberdade,178");
+    		evento8 = new Evento("Aplicações Java", "Esse evento tem o objetivo de realizar atividades com aplicacoes java", "01/09/2014", "Jose", "jose@gmail.com", 100, "Rua da Liberdade,178");
+    		evento9 = new Evento("Estruturas de dados", "Esse evento tem o objetivo de realizar atividades com estruturas de dados", "12/07/2014", "Jose", "jose@gmail.com", 100, "Rua da Liberdade,178");
+    		evento10 = new Evento("Binarios", "Esse evento tem o objetivo de realizar atividades com binarios sem a utilizacao de computador", "11/09/2014", "Jose", "jose@gmail.com", 100, "Rua da Liberdade,178");
     		
     		tema1 = "Engenharia de Software";
     		tema2 = "Sistemas da Informacao";
@@ -95,7 +113,6 @@ public class Application extends Controller {
     		evento7.addTema(tema5);	
     		
     		
-    		
     		getDao().persist(evento1);
     		getDao().persist(evento2);
     		getDao().persist(evento3);
@@ -107,6 +124,7 @@ public class Application extends Controller {
     		getDao().persist(evento9);
     		getDao().persist(evento10);
     		getDao().flush();
+    		
     		controleInicio++;
     		
     	}
@@ -153,6 +171,8 @@ public class Application extends Controller {
     
     @Transactional
     public static Result participar(Long id) {
+    	
+    	
     	Evento evento = getDao().findByEntityId(Evento.class, id);
     	Sistema sistema = new Sistema();
     	List<Evento> result = getDao().findAllByClassName("Evento");
@@ -162,27 +182,35 @@ public class Application extends Controller {
     
     @Transactional
     public static Result addParticipante(Long id) {
-    	// Todos o eventos do Banco de Dados
-    	List<Evento> result = getDao().findAllByClassName("Evento");
-    	// Lista de Pessoa
-    	List<Pessoa> pessoas = getDao().findAllByClassName("Pessoa");
-    	// O formulario de pessoa
-		Form<Pessoa> filledForm = pessoaForm.bindFromRequest();
-		Pessoa pessoa = filledForm.get();
+    	
+    	
+    	List<Evento> result;
 		Evento evento = getDao().findByEntityId(Evento.class, id);
-		evento.addParticipanteNoEvento(pessoa);
-		getDao().removeById(Evento.class, id);
+		Pessoa usuarioLogado = Login.getUsuarioAtual();
+		//Pessoa usuarioLogado = getDao().findByAttributeName(Pessoa.class, nome, login.get)
+		//Pessoa usuarioLogado = getDao().findByEntityId(Pessoa.class, 
+		//		Long.valueOf(session("email")));
+    	// Todos o eventos do Banco de Dados
+    	 result = getDao().findAllByClassName("Evento");
+    	 
+    	// Lista de Pessoa
+    	//List<Pessoa> pessoas = getDao().findAllByClassName("Pessoa");
+    	// O formulario de pessoa
+    	
+		//Form<Pessoa> filledForm = pessoaForm.bindFromRequest();
+		//Pessoa pessoa = filledForm.get();
+    	
+		//Evento evento = getDao().findByEntityId(Evento.class, id);
+		evento.addParticipanteNoEvento(usuarioLogado);
+		
+		getDao().merge(evento);
 		getDao().flush();
-		getDao().persist(evento);
 		Sistema sistema = new Sistema();
     	result = getDao().findAllByClassName("Evento");
     	sistema.setEventos(result);
 		return ok(views.html.evento.render(sistema, evento));
 		}
-    	
-    	
-    	
-    	
+    	   	
     
 
 	public static GenericDAO getDao() {
@@ -192,7 +220,11 @@ public class Application extends Controller {
 	public static void setDao(GenericDAO dao) {
 		Application.dao = dao;
 	}
+	
+	 
+	    }
+	
+	
     
     
 
-}

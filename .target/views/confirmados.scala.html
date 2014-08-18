@@ -1,0 +1,29 @@
+@(sistema: Sistema, evento: Evento)
+ <div class="container form-horizontal panel panel-primary text-info" >
+<h2>Pessoas Confirmadas no @evento.getNome():</h2>
+
+<div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome </th>
+                            <th>Email </th>                       
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(pessoa <- evento.getPessoasQueConfirmaram()) {
+                    	
+                        <tr>
+                            <td>@pessoa.getNome()</td>
+                            <td>@pessoa.getEmail()</td>                         
+                            
+         
+                        </tr>
+                        
+                    }
+                    </tbody>
+                </table>
+            </div></div>
+            
+           

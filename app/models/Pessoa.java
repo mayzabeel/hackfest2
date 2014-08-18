@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity(name = "Pessoa")
-public class Pessoa {
+public class Pessoa implements Comparable <Pessoa> {
 	
 	
 	// Gerador de Sequencia para o Id
@@ -36,7 +36,7 @@ public class Pessoa {
 	public Pessoa (String nome, String email){
 		this.email = email;
 		this.nome = nome;
-		this.pass = pass;
+		
 	}
 
 	public String getNome() {
@@ -101,6 +101,14 @@ public class Pessoa {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-	}	
+	}
 
+	public int compareTo(Pessoa outra) {		
+		return  (this.getNome().compareTo(outra.getNome()));
+	}
+
+	
+	
+	
+	
 }
